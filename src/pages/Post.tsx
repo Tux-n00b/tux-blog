@@ -19,8 +19,9 @@ const Post: React.FC = () => {
         setLoading(true);
         
         // Load post metadata
-        const response = await import('../data/blogIndex.json');
-        const postsData = response.default;
+        const response = await fetch(`${process.env.PUBLIC_URL}/data/blogIndex.json`);
+        const postsData: BlogPost[] = await response.json();
+
         const postData = postsData.find((p: BlogPost) => p.slug === slug);
         
         if (!postData) {
@@ -124,4 +125,4 @@ const Post: React.FC = () => {
   );
 };
 
-export default Post; 
+export default Post;
