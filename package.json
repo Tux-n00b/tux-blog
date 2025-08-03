@@ -2,7 +2,7 @@
   "name": "tux-blog",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://tux-n00b.github.io/",
+  "homepage": "https://tux-n00b.github.io/tux-blog",
   "dependencies": {
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.6.4",
