@@ -12,7 +12,7 @@ const About: React.FC = () => {
 
         <div className="about-content">
           <section className="about-section">
-            <h2>Who I Am</h2>
+            <h2>Who is &gt;_Tux.</h2>
             <p>
               I'm a passionate cybersecurity researcher and CTF enthusiast who loves exploring 
               the depths of security vulnerabilities and exploitation techniques. My journey 

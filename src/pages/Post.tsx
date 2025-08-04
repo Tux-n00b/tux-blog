@@ -109,7 +109,24 @@ const Post: React.FC = () => {
           </header>
           
           <div className="post-body">
-            <ReactMarkdown>{content}</ReactMarkdown>
+            <ReactMarkdown
+  components={{
+    img: ({ node, ...props }) => (
+      <img
+        {...props}
+        src={
+          props.src?.startsWith('http')
+            ? props.src
+            : `${process.env.PUBLIC_URL}${props.src}`
+        }
+        alt={props.alt}
+      />
+    ),
+    }}
+            >
+                {content}
+              </ReactMarkdown>
+
           </div>
           
           <footer className="post-footer">
