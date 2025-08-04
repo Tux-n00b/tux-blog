@@ -53,5 +53,14 @@
     "tags": ["Vulnhub", "Pentesting"],
     "filename": "kioptrix5.md",
     "thumbnail": "kioptrix5.png"
+  },
+    {
+    "slug": "goldeneye-ctf-writeup",
+    "title": "VulnHub Golden Eye Writeup",
+    "description": "A writeup of the Golden Eye vulnerable machine from VulnHub",
+    "date": "2025-04-08",
+    "tags": ["Vulnhub", "Pentesting"],
+    "filename": "golden-eye-writeup.md",
+    "thumbnail": "golden-eye-writeup.png"
   }
 ] 
