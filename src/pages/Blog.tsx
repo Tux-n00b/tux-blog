@@ -14,8 +14,9 @@ const Blog: React.FC = () => {
       try {
         // In a real app, you'd fetch this from an API
         // For now, we'll import the JSON directly
-        const response = await import('../data/blogIndex.json');
-        const postsData = response.default;
+        const response = await fetch(`${process.env.PUBLIC_URL}/data/blogIndex.json`);
+        const postsData: BlogPost[] = await response.json();
+
         
         setPosts(postsData);
         

@@ -3,8 +3,8 @@
 
 export const loadMarkdownContent = async (filename: string): Promise<string> => {
   try {
-    // Use fetch to load markdown files from the public/posts directory
-    const response = await fetch(`/posts/${filename}`);
+    // ✅ Include PUBLIC_URL so it works in subdirectories like /tux-blog
+    const response = await fetch(`${process.env.PUBLIC_URL}/posts/${filename}`);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -19,4 +19,4 @@ export const loadMarkdownContent = async (filename: string): Promise<string> => 
 // Legacy function for backward compatibility
 export const getMarkdownContent = async (filename: string): Promise<string> => {
   return loadMarkdownContent(filename);
-}; 
+};
