@@ -9,49 +9,49 @@ tags: ["Pentesting","Vulnhub"]
 I did simple enumeration to identify the vuln machine.
 So I first did some enumeration to identify our vulnerable machine. Using `arp-scan -l`
 
-![Enumaration](/public/post-images/Golden-Eye/01Enum.png)
+![Enumaration](/post-images/Golden-Eye/01Enum.png)
 
 I found the machine's IP address and started a nmap scan to identify open ports we take a next step to enumerate 
 once more by also checking for hidden directories in the machine by performing a `dirb`
 
-![Enumaration](/public/post-images/Golden-Eye/02Enum.png)
+![Enumaration](/post-images/Golden-Eye/02Enum.png)
 
 `Nmap  -A -p- <IP>` -p- :scans all available ports since without it we don’t get the pop3 ports (55007,55006)
 
-![Enumaration](/public/post-images/Golden-Eye/Enum0.png)
+![Enumaration](/post-images/Golden-Eye/Enum0.png)
 
 **NOTE :**<mark> This will be of use later on in the trial so we went ahead and did some research 
 on pop3 and found its documentation and did some perusing and found some 
 common commands. </mark>
 
-![pop3-doc](/public/post-images/Golden-Eye/pop3%20doc.png)
+![pop3-doc](/post-images/Golden-Eye/pop3%20doc.png)
 
 Did some googling on POP3, and found that it has a command called `STAT` which returns the number of messages in the mailbox and the size of the mailbox. We can use this to our advantage to find the number of messages in the mailbox and the size of the mailbox.
 
 So I opened the vulnrable machine IP on the browser to host the site.
 
-![servenya](/public/post-images/Golden-Eye/01site.png)
+![servenya](/post-images/Golden-Eye/01site.png)
 
 Checking the site for more information I checked through the DevTools and then viewed the page's source code and I stumbled upon a link `teminal.js` in the source
 code 
 
-![teminal](/public/post-images/Golden-Eye/terminal.js.png)
+![teminal](/post-images/Golden-Eye/terminal.js.png)
 
 Following on the link it took me to another source code with some vital information; 
 I also found out that there was another user called Natalya who is said to be able to see 
 Boris’ password.  
 Based on this we have two users who we can enumerate and find out more about them.
 
-![01terminal](/public/post-images/Golden-Eye/01terminal.js.png)
+![01terminal](/post-images/Golden-Eye/01terminal.js.png)
 
 So I then took the encoded password and decoded it in [Cyberchef](https://gchq.github.io/CyberChef/) to get the password of the user Boris.
 
-![boris](/public/post-images/Golden-Eye/Boris.png)
+![boris](/post-images/Golden-Eye/Boris.png)
 
 I then accessed the /sev-home/ as instructed by http://172.168.48.132 and input Boris’ 
 logins; 
 
-![log](/public/post-images/Golden-Eye/log.png)
+![log](/post-images/Golden-Eye/log.png)
 
 There was nothing much but it was hinted out that there was use of a non-default port 
 pop3 which we had found in our enumeration. 
@@ -122,9 +122,9 @@ terminal.js source code we found) we found the following login credentials;
 We then got the following on Boris and so we ran the code again on Natalya and also 
 found some login credentials which we would then use to access their pop3 ***“terminals”***
 
-![credentials-from-hydra](/public/post-images/Golden-Eye/credz.png)
+![credentials-from-hydra](/post-images/Golden-Eye/credz.png)
 
-![credentials-from-hydra](/public/post-images/Golden-Eye/credz1.png)
+![credentials-from-hydra](/post-images/Golden-Eye/credz1.png)
 
 With everything in order we logged into Natalya first since previously we were informed 
 that Natalya could be abale to break Boris’ password, so most probably Natalya was a 
@@ -135,14 +135,14 @@ Lucky for us Natalya had very important information;
 
 So we add the servernaya-station.com in our /etc/hosts file.
 
-![host](/public/post-images/Golden-Eye/hostserv.png)
+![host](/post-images/Golden-Eye/hostserv.png)
 
-![host](/public/post-images/Golden-Eye/etchost.png)
+![host](/post-images/Golden-Eye/etchost.png)
 
 So we logged In as Xenia and checked on his profile found messages which was 
 interesting since it was similar that we found messages in pop3; 
 
-![Doak](/public/post-images/Golden-Eye/Drmember.png)
+![Doak](/post-images/Golden-Eye/Drmember.png)
 
 We checked his messages and found communications with Dr. Doak, with Doak 
 informing him that his email username is doak. 
@@ -152,34 +152,34 @@ credentials;
  + His username being: doak 
  + Password being: goat 
 
-![dr-credz](/public/post-images/Golden-Eye/drcredz.png)
+![dr-credz](/post-images/Golden-Eye/drcredz.png)
 
 In Doak’s module we found from his messages some secret.txt file; 
 
-![secret](/public/post-images/Golden-Eye/secret.png)
+![secret](/post-images/Golden-Eye/secret.png)
 
 Downloaded it, this was our findings; 
 
-![secret](/public/post-images/Golden-Eye/txt.png)
+![secret](/post-images/Golden-Eye/txt.png)
 
 We navigated to the URL in place and found an image and downloaded the image;
 
-![secret-pic](/public/post-images/Golden-Eye/pic.png)
+![secret-pic](/post-images/Golden-Eye/pic.png)
 
 We then used a tool called exiftool in kali to get information on the image, these were our 
 findings; 
 
-![exif](/public/post-images/Golden-Eye/exif1.png)
+![exif](/post-images/Golden-Eye/exif1.png)
 
 The image Description really stood out as it looked like a `base64 encoding which tends to 
 have double (==) at the end of the encoding`; 
 We decoded it and found;
 
-![decode](/public/post-images/Golden-Eye/listener2.png)
+![decode](/post-images/Golden-Eye/listener2.png)
 
 We then logged In as the admin; 
 
-![admin](/public/post-images/Golden-Eye/admin.png)
+![admin](/post-images/Golden-Eye/admin.png)
 
 having this as his password as the image hinted out on that we have ***“picked an access key”*** which might have ment that whatever our findings we would have the admin pass 
 key. 
@@ -189,28 +189,28 @@ Linux in ***“/usr/bin/aspell”*** .
 We can inject a code listener to get a bash if the machine has one. Here is the python2 
 code listener.
 
-![listener](/public/post-images/Golden-Eye/listener3.png)
+![listener](/post-images/Golden-Eye/listener3.png)
 
-![listener](/public/post-images/Golden-Eye/0__R97O_bdm-8PGbp3.png)
+![listener](/post-images/Golden-Eye/0__R97O_bdm-8PGbp3.png)
 
 After saving the changes we navigated once more to the site administration to plugins and 
 changed the default spell checker to pspellshell since it is the one that communicates with 
 the aspell: 
 
-![listener](/public/post-images/Golden-Eye/pspellshell.png)
+![listener](/post-images/Golden-Eye/pspellshell.png)
 
 We then changed it to Pspellshell since it was set to Google Spell by default; 
 
-![tiny](/public/post-images/Golden-Eye/pspell.png)
+![tiny](/post-images/Golden-Eye/pspell.png)
 
 After saving all changes we added an entry in the site pages <b>(but wherever you choose basically as long as there is a spell checker it will have to execute the listener). </b> 
 
-![tester](/public/post-images/Golden-Eye/test01.png)
+![tester](/post-images/Golden-Eye/test01.png)
 
 Running the spellchecker loads the site infinatly, and the listener in our terminal lauches 
 a bash shell; 
 
-![netcat](/public/post-images/Golden-Eye/nc.png)
+![netcat](/post-images/Golden-Eye/nc.png)
 
 Since we are www-data we must find a way to escalate our privileges to root, which is 
 the aim of the game. We have an idea that the machine runs on Ubuntu so we look for a 
@@ -230,7 +230,7 @@ on clang so we can modify how our code compiles;
 
 So we make changes on how our C code compiles; 
 
-![netcat](/public/post-images/Golden-Eye/cc.png)
+![netcat](/post-images/Golden-Eye/cc.png)
 
 By searching on gcc in the file we found and converted them to be compatible with the cc 
 compiler; 
@@ -239,10 +239,12 @@ vuln machine bash;
 **NOTE;** We used port 8000 since port 80 and 8080 were already in use<mark>(You can choose 
 whatever port number you wish as long as the machine you are on is not using it)</mark> 
 
-![netcat](/public/post-images/Golden-Eye/compile.png)
+![netcat](/post-images/Golden-Eye/compile.png)
 
 Then to compile and run the C file; 
 
 With it compiled we run the exploit and just like that we get a root bash;
 
-![netcat](/public/post-images/Golden-Eye/whoami.png)
+![](/post-images/Golden-Eye/whoami.png)
+
+Thank you. Next I will do Metasploitable 1.
