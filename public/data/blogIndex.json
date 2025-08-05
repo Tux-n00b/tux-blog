@@ -41,7 +41,7 @@
     "description": "A writeup of the Golden Eye CTF challenge from VulnHub",
     "date": "2025-08-04",
     "tags": ["Pentesting", "Vulnhub"],
-    "filename": "golden-eye-writeup.md",
+    "filename": "goldeneye-writeup.md",
     "thumbnail": "golden-eye-writeup.png"
   },
   {
@@ -50,7 +50,7 @@
     "description": "A writeup of the Metasploitable 3 CTF challenge from VulnHub",
     "date": "2025-08-04",
     "tags": ["Pentesting", "Vulnhub"],
-    "filename": "mta.md",
+    "filename": "README.md",
     "thumbnail": "golden-eye-writeup.png"
   }
 ] 
