@@ -1,9 +1,3 @@
----
-title: "A walkthrough of Golden Eye vulnerable machine"
-date: "2025-04-08"
-tags: ["Pentesting","Vulnhub"]
----
-
 # Golden-Eye Writeup
 
 I did simple enumeration to identify the vuln machine.
