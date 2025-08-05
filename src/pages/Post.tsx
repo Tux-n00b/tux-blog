@@ -17,29 +17,25 @@ const Post: React.FC = () => {
     const loadPost = async () => {
       try {
         setLoading(true);
-        
-      // Load post metadata
-      const response = await fetch(`${process.env.PUBLIC_URL}/data/blogIndex.json`);
-      const postsData: BlogPost[] = await response.json();
-      const postData = postsData.find((p: BlogPost) => p.slug === slug);
+        setError('');
 
-        
-        if (!postData) {
-          setError('Post not found');
-          setLoading(false);
-          return;
+        const response = await fetch(`${process.env.PUBLIC_URL}/data/blogIndex.json`);
+        const postsData: BlogPost[] = await response.json();
+        const foundPost = postsData.find((p) => p.slug === slug);
+
+        if (!foundPost) {
+          throw new Error('Post not found in index');
         }
-        
-        setPost(postData);
-        
-        // Load markdown content
-        const markdownContent = await getMarkdownContent(postData.filename);
+
+        setPost(foundPost);
+
+        const markdownContent = await getMarkdownContent(foundPost.filename);
         setContent(markdownContent);
-        
+
         setLoading(false);
-      } catch (error) {
-        console.error('Error loading post:', error);
-        setError('Error loading post');
+      } catch (err) {
+        console.error('Error loading post:', err);
+        setError('Failed to load post. GitHub Pages may still be syncing. Please try again.');
         setLoading(false);
       }
     };
@@ -62,21 +58,21 @@ const Post: React.FC = () => {
     );
   }
 
-  if (error || !post) {
+  if (error) {
     return (
       <div className="post-page">
         <div className="container">
           <div className="error">
-            <h1>Post Not Found</h1>
-            <p>{error || 'The requested post could not be found.'}</p>
-            <Link to="/blog" className="btn">
-              Back to Blog
-            </Link>
+            <h1>Error Loading Post</h1>
+            <p>{error}</p>
+            <Link to="/blog" className="btn">← Back to Blog</Link>
           </div>
         </div>
       </div>
     );
   }
+
+  if (!post) return null;
 
   return (
     <div className="post-page">
@@ -84,56 +80,44 @@ const Post: React.FC = () => {
         <article className="post-content">
           <header className="post-header">
             <nav className="post-nav">
-              <Link to="/blog" className="back-link">
-                ← Back to Blog
-              </Link>
+              <Link to="/blog" className="back-link">← Back to Blog</Link>
             </nav>
-            
+
             <h1 className="post-title">{post.title}</h1>
-            
+
             <div className="post-meta">
               <time className="post-date">
                 {format(new Date(post.date), 'MMMM dd, yyyy')}
               </time>
-              
               <div className="post-tags">
-                {post.tags.map((tag, index) => (
-                  <span key={index} className="tag">
-                    #{tag}
-                  </span>
+                {post.tags.map((tag, i) => (
+                  <span key={i} className="tag">#{tag}</span>
                 ))}
               </div>
             </div>
-            
+
             <p className="post-description">{post.description}</p>
           </header>
-          
+
           <div className="post-body">
             <ReactMarkdown
-  components={{
-    img: ({ node, ...props }) => (
-      <img
-        {...props}
-        src={
-          props.src?.startsWith('http')
-            ? props.src
-            : `${process.env.PUBLIC_URL}${props.src}`
-        }
-        alt={props.alt}
-      />
-    ),
-    }}
+              components={{
+                img: ({ src = '', alt = '' }) => (
+                  <img
+                    src={src.startsWith('http') ? src : `${process.env.PUBLIC_URL}${src}`}
+                    alt={alt}
+                    style={{ maxWidth: '100%' }}
+                  />
+                )
+              }}
             >
-                {content}
-              </ReactMarkdown>
-
+              {content}
+            </ReactMarkdown>
           </div>
-          
+
           <footer className="post-footer">
             <div className="post-navigation">
-              <Link to="/blog" className="btn">
-                ← Back to Blog
-              </Link>
+              <Link to="/blog" className="btn">← Back to Blog</Link>
             </div>
           </footer>
         </article>
@@ -142,4 +126,4 @@ const Post: React.FC = () => {
   );
 };
 
-export default Post; 
+export default Post;

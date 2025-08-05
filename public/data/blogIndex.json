@@ -3,7 +3,7 @@
     "slug": "binary-exploitation-journey",
     "title": "Binary Exploitation Journey", 
     "description": "A detailed walkthrough of my binary exploitation journey",
-    "date": "2025-03-10",
+    "date": "2025-03-01",
     "tags": ["Security", "Beginner", "Binary Exploitation"],
     "filename": "binary-exploitation-journey.md",
     "thumbnail": "binary-exploitation-journey.png"
@@ -12,7 +12,7 @@
     "slug": "sec-journal",
     "title": "Web Security Fundamentals",
     "description": "Understanding the basics of web security and common vulnerabilities",
-    "date": "2024-08-03",
+    "date": "2025-03-03",
     "tags": ["Web", "Security", "Beginner"],
     "filename": "sec-journal.md",
     "thumbnail": "sec-journal.png"
@@ -21,7 +21,7 @@
     "slug": "web-exploitation-journey",
     "title": "Web Exploitation Journey",
     "description": "A detailed walkthrough of my web exploitation journey",
-    "date": "2025-02-08",
+    "date": "2025-08-02",
     "tags": ["Beginner", "Web", "Security"],
     "filename": "web-exploitation-journey.md",
     "thumbnail": "web-security-journey.png"
@@ -30,7 +30,7 @@
     "slug": "kioptrix5",
     "title": "VulnHub Kioptrix 5 Writeup",
     "description": "A writeup of the Kioptrix 5 vulnerable machine from VulnHub",
-    "date": "2025-02-08",
+    "date": "2025-08-02",
     "tags": ["Vulnhub", "Pentesting"],
     "filename": "kioptrix5.md",
     "thumbnail": "kioptrix5.png"
@@ -42,6 +42,15 @@
     "date": "2025-08-04",
     "tags": ["Pentesting", "Vulnhub"],
     "filename": "golden-eye-writeup.md",
+    "thumbnail": "golden-eye-writeup.png"
+  },
+  {
+    "slug": "golden-eye-writeup",
+    "title": "Metasploitable 3 Writeup",
+    "description": "A writeup of the Metasploitable 3 CTF challenge from VulnHub",
+    "date": "2025-08-04",
+    "tags": ["Pentesting", "Vulnhub"],
+    "filename": "mta.md",
     "thumbnail": "golden-eye-writeup.png"
   }
 ] 
