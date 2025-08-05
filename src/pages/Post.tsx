@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
+import rehypeHighlight from 'rehype-highlight';                      // ✅ NEW
+import 'highlight.js/styles/github-dark.css';                        // ✅ NEW
 import { format } from 'date-fns';
 import { BlogPost } from '../types/blog';
 import { getMarkdownContent } from '../utils/markdownLoader';
 import './Post.css';
+
 
 const Post: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -101,6 +104,7 @@ const Post: React.FC = () => {
 
           <div className="post-body">
             <ReactMarkdown
+            rehypePlugins={[rehypeHighlight]}
               components={{
                 img: ({ src = '', alt = '' }) => (
                   <img
