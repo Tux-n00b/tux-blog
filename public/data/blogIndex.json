@@ -1,24 +1,5 @@
 [
-  {
-    "slug": "sample-ctf-writeup",
-    "title": "Sample CTF Writeup",
-    "description": "A sample CTF challenge writeup demonstrating the blog functionality",
-    "date": "2024-01-15",
-    "tags": ["Web", "Security"],
-    "filename": "sample-ctf-writeup.md",
-    "thumbnail": "ctf-writeup-thumb.jpg"
-  },
-  {
-    "slug": "getting-started-with-pentesting",
-    "title": "Getting Started with Penetration Testing",
-    "description": "A beginner's guide to penetration testing and ethical hacking",
-    "date": "2024-01-10",
-    "tags": ["Pentesting", "Security", "Beginner"],
-    "filename": "getting-started-with-pentesting.md",
-    "thumbnail": "pentesting-thumb.jpg"
-  },
-
-  {
+ {
     "slug": "binary-exploitation-journey",
     "title": "Binary Exploitation Journey", 
     "description": "A detailed walkthrough of my binary exploitation journey",
