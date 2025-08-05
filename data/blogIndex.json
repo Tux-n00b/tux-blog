@@ -36,15 +36,6 @@
     "thumbnail": "kioptrix5.png"
   },
   {
-    "slug": "golden-eye-writeup",
-    "title": "Golden Eye Writeup",
-    "description": "A writeup of the Golden Eye CTF challenge from VulnHub",
-    "date": "2025-08-04",
-    "tags": ["Pentesting", "Vulnhub"],
-    "filename": "goldeneye-writeup.md",
-    "thumbnail": "golden-eye-writeup.png"
-  },
-  {
     "slug": "Meta the title",
     "title": "Metasploitable 3 Writeup",
     "description": "A writeup of the Metasploitable 3 CTF challenge from VulnHub",
