@@ -283,3 +283,10 @@ This project is open source and available under the [MIT License](LICENSE).
 - git branch -M main
 - git remote add origin https://github.com/Tux-n00b/tux-blog.git
 - git push -u origin main
+
+
+Perform the following;
+- npm run build
+- npm run start
+
+Then host the project.
