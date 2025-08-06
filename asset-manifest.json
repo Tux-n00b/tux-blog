@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/tux-blog/static/css/main.60d2cfca.css",
-    "main.js": "/tux-blog/static/js/main.90516557.js",
+    "main.js": "/tux-blog/static/js/main.e13ac1ea.js",
     "static/js/322.39cbfea6.chunk.js": "/tux-blog/static/js/322.39cbfea6.chunk.js",
     "index.html": "/tux-blog/index.html",
     "main.60d2cfca.css.map": "/tux-blog/static/css/main.60d2cfca.css.map",
-    "main.90516557.js.map": "/tux-blog/static/js/main.90516557.js.map"
+    "main.e13ac1ea.js.map": "/tux-blog/static/js/main.e13ac1ea.js.map"
   },
   "entrypoints": [
     "static/css/main.60d2cfca.css",
-    "static/js/main.90516557.js"
+    "static/js/main.e13ac1ea.js"
   ]
 }
