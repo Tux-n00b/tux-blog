@@ -9,22 +9,22 @@ interface PostCardProps {
 }
 
 const PostCard: React.FC<PostCardProps> = ({ post }) => {
-  const thumbnailSrc = post.thumbnail 
-    ? `/thumbnails/${post.thumbnail}` 
-    : '/thumbnails/default-thumb.jpg';
+const thumbnailSrc = post.thumbnail?.startsWith('/')
+  ? `${process.env.PUBLIC_URL}${post.thumbnail}`
+  : `${process.env.PUBLIC_URL}/thumbnails/${post.thumbnail}`;
+
 
   return (
     <article className="post-card">
-      <div className="post-thumbnail">
-        <img 
-          src={thumbnailSrc} 
-          alt={post.title}
-          onError={(e) => {
-            // Hide thumbnail if image fails to load
-            e.currentTarget.style.display = 'none';
-          }}
-        />
-      </div>
+  <div className="post-thumbnail">
+    <img 
+      src={thumbnailSrc} 
+      alt={post.title}
+      onError={(e) => {
+        e.currentTarget.style.display = 'none';
+      }}
+    />
+  </div>
       
       <div className="post-card-header">
         <h3 className="post-title">
