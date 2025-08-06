@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Blog from './pages/Blog';
 import Post from './pages/Post';
 import About from './pages/About';
+import Progress from './pages/Progress';
 import './styles/global.css';
 import './App.css';
 
@@ -20,6 +21,7 @@ function App() {
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<Post />} />
             <Route path="/about" element={<About />} />
+            <Route path="/progress" element={<Progress />} />
           </Routes>
         </main>
         <Footer />

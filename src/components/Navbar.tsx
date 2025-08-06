@@ -38,6 +38,14 @@ const Navbar: React.FC = () => {
               ABOUT
             </Link>
           </li>
+          <li>
+            <Link 
+              to="/progress"
+              className={location.pathname === '/progress' ? 'active' : ''}
+            >
+              PROGRESS
+            </Link>
+          </li>
         </ul>
       </div>
     </nav>
