@@ -1,11 +1,20 @@
 [
- {
+  {
+    "slug": "ret2win64",
+    "title": "Ret2Win64", 
+    "description": "A detailed walkthrough of the Ret2Win64 binary exploitation challenge",
+    "date": "2025-08-06",
+    "tags": [ "ROP", "Binary Exploitation"],
+    "filename": "binary/ROP/ret2win64.md",
+    "thumbnail": "binary-exploitation-journey.png"
+  },
+  {
     "slug": "binary-exploitation-journey",
     "title": "Binary Exploitation Journey", 
     "description": "A detailed walkthrough of my binary exploitation journey",
     "date": "2025-03-01",
-    "tags": ["Security", "Beginner", "Binary Exploitation"],
-    "filename": "binary-exploitation-journey.md",
+    "tags": ["Security", "Binary Exploitation"],
+    "filename": "binary/binary-exploitation-journey.md",
     "thumbnail": "binary-exploitation-journey.png"
   },
   {
@@ -32,7 +41,7 @@
     "description": "A writeup of the Kioptrix 5 vulnerable machine from VulnHub",
     "date": "2025-08-02",
     "tags": ["Vulnhub", "Pentesting"],
-    "filename": "kioptrix5.md",
+    "filename": "vulnhub/kioptrix5.md",
     "thumbnail": "kioptrix5.png"
   },
 {
@@ -41,7 +50,7 @@
     "description": "A writeup of the Golden Eye CTF challenge from VulnHub",
     "date": "2025-08-04",
     "tags": ["Pentesting", "Vulnhub"],
-    "filename": "goldeneye-writeup.md",
+    "filename": "vulnhub/goldeneye-writeup.md",
     "thumbnail": "golden-eye-writeup.png"
   }
 ] 
