@@ -1,5 +1,14 @@
 [
   {
+    "slug": "split-x86_64-x86",
+    "title": "Split ROP Chain", 
+    "description": "A detailed walkthrough of splitting a ROP chain for x86_64 and x86 architectures",
+    "date": "2025-08-07",
+    "tags": [ "ROP", "Binary Exploitation"],
+    "filename": "binary/ROP/split.md",
+    "thumbnail": "binary-exploitation-journey.png"
+  },
+  {
     "slug": "ret2win64",
     "title": "Ret2Win64", 
     "description": "A detailed walkthrough of the Ret2Win64 binary exploitation challenge",
