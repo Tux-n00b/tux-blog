@@ -1,0 +1,49 @@
+name: Auto Commit for Streak
+
+on:
+  schedule:
+    - cron: "1 9 * * *" # 12:01 PM Kenyan Time (UTC+3)
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  auto-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set Git config
+        run: |
+          git config --global user.name "GitHub Action Bot"
+          git config --global user.email "actions@github.com"
+
+      - name: Add and commit changes
+        run: |
+          git add .
+          
+          # List changed files
+          CHANGED_FILES=$(git diff --cached --name-only)
+          echo "Changed files:"
+          echo "$CHANGED_FILES"
+
+          if [ -z "$CHANGED_FILES" ]; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          # Get the first file name only
+          FIRST_FILE=$(echo "$CHANGED_FILES" | head -n 1)
+          
+          # Create commit message
+          COMMIT_MESSAGE="auto: updated $FIRST_FILE on $(date '+%Y-%m-%d %H:%M:%S')"
+          
+          # Print commit message in green in the log
+          echo -e "\033[32mCommitting with message: $COMMIT_MESSAGE\033[0m"]
+          
+          # Commit
+          git commit -m "$COMMIT_MESSAGE"
+
+      - name: Push changes
+        run: git push origin main
