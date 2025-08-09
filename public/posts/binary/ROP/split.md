@@ -263,7 +263,7 @@ With the  rop gadget we can create a chain of instructions that will pop the /bi
 This is because it will have to place the `bin/cat/flag.txt` on the RDI (`rop_gadget`) address first then the system call will coninue and call the object in the RDI.
 It is advisable to take the addresses from your GDB rather than the `rabin2` mostly for the system call because the addresses are not the same
 
-![15flag](/post-images/split/15flag.png)
+
 
 Prints the flag with a segmentation fault.
 ---
