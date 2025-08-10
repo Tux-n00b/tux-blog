@@ -1,4 +1,13 @@
 [
+    {
+    "slug": "callme-x86_64-x86",
+    "title": "callme@PLT", 
+    "description": "A detailed walkthrough of the callme@PLT binary exploitation challenge",
+    "date": "2025-08-10",
+    "tags": [ "ROP", "Binary Exploitation"],
+    "filename": "binary/ROP/callme.md",
+    "thumbnail": "binary-exploitation-journey.png"
+  },
   {
     "slug": "split-x86_64-x86",
     "title": "Split ROP Chain", 
