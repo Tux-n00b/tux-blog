@@ -1,0 +1,42 @@
+.flip-digit {
+  perspective: 1000px;
+  display: inline-block;
+  margin: 0 4px;
+}
+
+.flip-inner {
+  position: relative;
+  width: 60px;
+  height: 80px;
+  background: black;
+  color: white;
+  font-size: 2.5rem;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  text-align: center;
+  line-height: 80px;
+  border-radius: 5px;
+  box-shadow: 0 0 15px rgba(255,255,255,0.2);
+}
+
+.flip-front,
+.flip-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.flip-back {
+  transform: rotateX(180deg);
+}
+
+.flipping {
+  animation: flipAnim 0.6s ease-in-out;
+}
+
+@keyframes flipAnim {
+  0%   { transform: rotateX(0deg); }
+  50%  { transform: rotateX(-90deg); }
+  100% { transform: rotateX(-180deg); }
+}

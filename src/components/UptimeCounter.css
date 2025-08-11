@@ -1,0 +1,23 @@
+.uptime-digital {
+  font-family: 'Courier New', monospace;
+  font-size: 2rem;
+  text-align: center;
+  color: white;
+}
+
+.uptime-display {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.uptime-display span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.uptime-display small {
+  font-size: 0.7rem;
+  color: gray;
+}

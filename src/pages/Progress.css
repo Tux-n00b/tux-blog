@@ -1,53 +1,68 @@
-/* src/pages/Progress.css */
-
+/* Container styling matches blog pages */
 .progress-page {
-  padding-top: 60px;
-  padding-bottom: 60px;
-  background-color: #0d1117; /* GitHub dark background */
-  color: #c9d1d9;
-  min-height: 100vh;
-}
-
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 1rem;
+  padding: 2rem 0;
 }
 
 .progress-header {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 2rem;
 }
 
-.progress-header h1 {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
+.progress-title {
+  font-size: 2rem;
+  color: var(--primary-color);
 }
 
-.progress-header p {
+.progress-subtitle {
   font-size: 1.1rem;
-  color: #8b949e;
+  color: var(--text-muted);
 }
 
 .progress-section {
-  margin-bottom: 60px;
+  margin-bottom: 2rem;
 }
 
-.progress-section h2 {
-  font-size: 1.8rem;
-  margin-bottom: 20px;
-  border-bottom: 2px solid #30363d;
-  padding-bottom: 10px;
+.section-title {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
 }
 
+/* Cards - matches blog card aesthetics */
+.card {
+  background: var(--card-bg);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: var(--card-shadow);
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+/* Stats grid */
 .stats-grid {
   display: grid;
-  gap: 20px;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
 }
 
-.stats-grid img {
-  width: 100%;
-  border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+.calendar-card {
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.uptime-card {
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.uptime-text {
+  margin: 0;
 }
