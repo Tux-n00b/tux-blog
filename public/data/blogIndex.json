@@ -1,5 +1,14 @@
 [
-    {
+   {
+    "slug": "rce_90_day_plan-journey",
+    "title": "RCE_90_day_planJourney",
+    "description": "A detailed walkthrough of my rce_90_day_plan journey",
+    "date": "2025-08-02",
+    "tags": ["Beginner", "Web", "Security"],
+    "filename": "rce_90_day_plan.md",
+    "thumbnail": "web-security-journey.png"
+  },  
+  {
     "slug": "callme-x86_64-x86",
     "title": "callme@PLT", 
     "description": "A detailed walkthrough of the callme@PLT binary exploitation challenge",
