@@ -1,5 +1,23 @@
 [
-   {
+  {
+    "slug": "empire-breakout",
+    "title": "Empire: Breakout",
+    "description": " Easy This box was created to be an Easy box, but it can be Medium if you get lost.",
+    "date": "2024-09-02",
+    "tags": ["Vulnhub", "Security"],
+    "filename": "empire-breakout.md",
+    "thumbnail": "empire-breakout.png"
+  },
+  {
+    "slug": "Command_Injection",
+    "title": "Command Injection",
+    "description": "A beginner's guide to Command Injection vulnerabilities",
+    "date": "2025-09-01",
+    "tags": ["Beginner", "Security"],
+    "filename": "command-injection-expanded.md",
+    "thumbnail": "command-injection.png"
+  },
+  {
     "slug": "rce_90_day_plan-journey",
     "title": "RCE_90_day_planJourney",
     "description": "A detailed walkthrough of my rce_90_day_plan journey",
