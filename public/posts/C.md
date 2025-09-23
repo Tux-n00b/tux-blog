@@ -1725,7 +1725,9 @@ Escape Character
 - \n	  ---> New Line	
 - \t		  ---> Tab	
 - \0		  ---> Null
+
 # C String Functions
+
 
 
 
