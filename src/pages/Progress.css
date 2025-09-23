@@ -66,3 +66,22 @@
 .uptime-text {
   margin: 0;
 }
+
+
+.markdown-table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.5rem 0;
+}
+
+.markdown-th,
+.markdown-td {
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.markdown-th {
+  background-color: #222;
+  color: #fff;
+}

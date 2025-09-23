@@ -1,3 +1,4 @@
+import remarkGfm from 'remark-gfm'; 
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
@@ -104,6 +105,7 @@ const Post: React.FC = () => {
 
           <div className="post-body">
             <ReactMarkdown
+            remarkPlugins={[remarkGfm]}   // ✅ Enable GFM (tables, etc.)
             rehypePlugins={[rehypeHighlight]}
               components={{
                 img: ({ src = '', alt = '' }) => (
