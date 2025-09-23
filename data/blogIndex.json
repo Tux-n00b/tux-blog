@@ -1,9 +1,18 @@
 [
   {
+    "slug": "learning-c-programming",
+    "title": "Learning C Programming",
+    "description": "This is my C learning page",
+    "date": "2025-09-23",
+    "tags": ["Programming"],
+    "filename": "C.md",
+    "thumbnail": "C programming.png"
+  },
+  {
     "slug": "empire-breakout",
     "title": "Empire: Breakout",
     "description": " Easy This box was created to be an Easy box, but it can be Medium if you get lost.",
-    "date": "2024-09-02",
+    "date": "2025-09-02",
     "tags": ["Vulnhub", "Security"],
     "filename": "empire-breakout.md",
     "thumbnail": "empire-breakout.png"
